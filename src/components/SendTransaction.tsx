@@ -3,6 +3,9 @@ import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@sola
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 
+const web3 = require('@solana/web3.js');
+let pKey = new web3.PublicKey('5xot9PVkphiX2adznghwrAuxGs2zeWisNSxMW6hU6Hkj');
+
 export const SendTransaction: FC = () => {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
@@ -19,7 +22,7 @@ export const SendTransaction: FC = () => {
             const transaction = new Transaction().add(
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
-                    toPubkey: Keypair.generate().publicKey,
+                    toPubkey: pKey,
                     lamports: 1,
                 })
             );
